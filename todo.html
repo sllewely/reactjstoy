@@ -13,11 +13,11 @@
     
     
 <script type="text/jsx">
-var App = React.createClass({
+    var App = React.createClass({
 
     getInitialState: function(){
         return {
-//            listItems: []
+            listItems: ['cats', 'dogs', 'muffins']
         }
     },
     
@@ -25,14 +25,14 @@ var App = React.createClass({
     },
 
     render: function(){
-        return(
+        return (
             <div>
-                // Title
                 <h1>My todo list app</h1>
 
-                // Enter text component
-
-                // List
+                <p>Enter text component</p>
+                
+                <p>List</p>
+                <List list={this.state.listItems} />
             </div>
         );   
     } //end render
@@ -40,10 +40,36 @@ var App = React.createClass({
 });
 
 
+// Expects props: list
+var List = React.createClass({
+    
+    render: function() {
+        return(
+            <div>
+                <p>foreach list item</p>
+                {this.props.list.map(function(item_text){
+                    return <ListItem item={item_text} />
+                })}
+            </div>
+        );
+    }
+});
 
+
+// Expects props: item
+var ListItem = React.createClass({
+    
+    render: function() {
+        return(
+            <div>
+                {this.props.item}
+            </div>
+            )
+        }
+    
+});
 
 React.render(<App />,  document.getElementById("content"));
-
 </script>
 </body>
 </html>
