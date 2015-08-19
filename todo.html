@@ -21,7 +21,10 @@
         }
     },
     
-    addListItem: function(){
+    addListItem: function(new_item){
+        this.setState({
+            listItems: this.state.listItems.concat([new_item])
+            })
     },
 
     render: function(){
@@ -30,6 +33,7 @@
                 <h1>My todo list app</h1>
 
                 <p>Enter text component</p>
+                <EnterListItemTextBox handleAdd={this.addListItem} />
                 
                 <p>List</p>
                 <List list={this.state.listItems} />
@@ -67,6 +71,25 @@ var ListItem = React.createClass({
             )
         }
     
+});
+
+// Expects props: addListItem()
+var EnterListItemTextBox = React.createClass({
+    
+    handleClick: function() {
+        console.log("I am clicked");
+        var text = "";
+        this.props.handleAdd("cool");
+    },
+    
+    render: function() {
+        return(
+            <div>
+                <input type="text" />
+                <input type="submit" onClick={this.handleClick}/>
+            </div>
+        );
+    }
 });
 
 React.render(<App />,  document.getElementById("content"));
